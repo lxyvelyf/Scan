@@ -1,5 +1,5 @@
 <template>
-    <div ref ="parent" class="gamemap">
+    <div ref="parent" class="gamemap">
         <canvas ref="canvas" tabindex="0">
 
         </canvas>
@@ -8,17 +8,20 @@
 
 <script>
 import { GameMap } from '@/assets/scripts/GameMap';
-import { ref ,onMounted} from 'vue';
-export default{
-    setup(){
-        let parent  = ref(null);
+import { ref, onMounted } from 'vue';
+import { useStore } from 'vuex';
+
+export default {
+    setup() {
+        const store = useStore();
+        let parent = ref(null);
         let canvas = ref(null);
 
-        onMounted(()=>{
-            new GameMap(canvas.value.getContext('2d'),parent.value)
+        onMounted(() => {
+            store.commit("updateGameObject", new GameMap(canvas.value.getContext('2d'), parent.value, store));
         });
 
-        return{
+        return {
             parent,
             canvas,
         }
@@ -26,13 +29,12 @@ export default{
 }
 </script>
 
-<style scoped> 
-    div.gamemap{
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-    }
+<style scoped> div.gamemap {
+     width: 100%;
+     height: 100%;
+     display: flex;
+     justify-content: center;
+     align-content: center;
+ }
 </style>
 
