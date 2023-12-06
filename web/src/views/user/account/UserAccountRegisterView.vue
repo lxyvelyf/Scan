@@ -40,7 +40,7 @@ export default {
         const register = () => {
             error_message.value="";
             $.ajax({
-                url: "http://127.0.0.1:3000/user/account/register/",
+                url: "http://39.101.65.232:3000/user/account/register/",
                 type: "post",
                 data: {
                     username: username.value,
